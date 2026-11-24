@@ -1,4 +1,3 @@
-// Start of wxWidgets "Hello World" Program
 #include <wx/wx.h>
 #include "./frames/main_frame.hpp"
  
