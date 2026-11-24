@@ -1,5 +1,6 @@
 #include <wx/wx.h>
 #include "welcome/welcome_frame.hpp"
+#include "fileForm/file_form.hpp"
 
 
 
@@ -10,6 +11,7 @@ public:
     wxButton* mainButton;
     wxPanel* mainPanel;
     WelcomeFrame* welcomeframe;
+    FileForm* fileForm;
     wxBoxSizer* topSizer;
     int counter = 0;
 private:

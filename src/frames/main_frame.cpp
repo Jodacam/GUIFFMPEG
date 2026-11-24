@@ -41,7 +41,10 @@ MyFrame::MyFrame()
     Bind(wxEVT_BUTTON, &MyFrame::OnClickMainButton, this, ID_main_button);
     topSizer = new wxBoxSizer(wxVERTICAL);
     this->welcomeframe = new WelcomeFrame(this->mainPanel);
+    this->fileForm = new FileForm(this->mainPanel);
     topSizer->Add(this->welcomeframe, wxSizerFlags().Align(wxALIGN_CENTER_HORIZONTAL));
+    topSizer->Add(this->fileForm);
+    topSizer->Hide(this->fileForm);
 
     this->mainPanel->SetSizer(topSizer, true);
     this->mainPanel->Layout();
@@ -65,10 +68,18 @@ void MyFrame::OnAbout(wxCommandEvent& event)
 
 void MyFrame::OnHello(wxCommandEvent& event)
 {
-    wxLogMessage("Hello world from wxWidgets!");
+    this->topSizer->Hide(this->fileForm);
+    this->topSizer->Show(this->welcomeframe);
 }
 
 void MyFrame::OnClickMainButton(wxCommandEvent& event) {
-    wxMessageBox("This is a wxWidgets Hello World example",
-        "About Hello World", wxOK | wxICON_INFORMATION);
+
+    wxFileDialog fileChooser(this,_T("Select a valid video file"),wxEmptyString,wxEmptyString,"*",wxFD_OPEN|wxFD_FILE_MUST_EXIST);
+
+    if(fileChooser.ShowModal() == wxID_CANCEL) {
+        wxMessageBox(_T("No file Selected"));
+        return;
+    }
+
+     wxMessageBox(fileChooser.GetPath());
 }
