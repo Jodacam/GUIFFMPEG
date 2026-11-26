@@ -43,7 +43,7 @@ MyFrame::MyFrame()
     this->welcomeframe = new WelcomeFrame(this->mainPanel);
     this->fileForm = new FileForm(this->mainPanel);
     topSizer->Add(this->welcomeframe, wxSizerFlags().Align(wxALIGN_CENTER_HORIZONTAL));
-    topSizer->Add(this->fileForm);
+    topSizer->Add(this->fileForm,wxSizerFlags().Align(wxALIGN_CENTER_HORIZONTAL));
     topSizer->Hide(this->fileForm);
 
     this->mainPanel->SetSizer(topSizer, true);
@@ -81,5 +81,7 @@ void MyFrame::OnClickMainButton(wxCommandEvent& event) {
         return;
     }
 
-     wxMessageBox(fileChooser.GetPath());
+    topSizer->Hide(this->welcomeframe);
+    topSizer->Show(this->fileForm);
+    topSizer->Layout();
 }
